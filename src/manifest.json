@@ -1,0 +1,27 @@
+{
+   "applications": {
+		"gecko": {
+			"id": "addon-update-notifier@jackymancs4"
+		}
+	},
+   "background": {
+      "scripts": ["constants.js", "notifications.js", "management.js" ]
+   },
+   "default_locale": "en",
+   "description": "__MSG_extDescription__",
+   "icons": {
+      "16": "icons/icon.svg",
+      "24": "icons/icon.svg",
+      "32": "icons/icon.svg",
+      "64": "icons/icon.svg",
+      "128": "icons/icon.svg",
+      "256": "icons/icon.svg"
+  },
+   "manifest_version": 2,
+   "name": "__MSG_extName__",
+   "options_ui": {
+     "page": "options.html",
+   },
+   "permissions": [ "alarms", "management", "notifications", "storage" ],
+   "version": "1.0.0"
+}

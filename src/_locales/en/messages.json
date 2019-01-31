@@ -1,0 +1,53 @@
+{
+   "autoCloseNotification": {
+      "description": "Text displayed to auto close notifications in the options page.",
+      "message": "Automatically close notifications"
+   },
+   "openhomepage":{
+      "message": "Open addon homepage (if available)"
+   },
+   "extDescription": {
+      "description": "Addon description.",
+      "message": "Show a notification when an addon is updated."
+   },
+   "extName": {
+      "description": "Extension name.",
+      "message": "Addon Update Notifier"
+   },
+   "updatedExtensionMessage": {
+      "description": "Text displayed in the extension notification. Expects addon name, old version and version to be passed in.",
+      "message": "$extensionName$ has been updated from version $extensionOldVersion$ to $extensionVersion$.",
+      "placeholders": {
+         "extensionName": {
+            "content": "$1",
+            "example": "My Firefox Addon"
+         },
+         "extensionOldVersion": {
+            "content": "$2",
+            "example": "1.0"
+         },
+         "extensionVersion": {
+            "content": "$3",
+            "example": "2.0"
+         }
+      }
+   },
+   "updatedExtensionTitle": {
+      "description": "Title displayed in the extension notification. Expects extension name to be passed in.",
+      "message": "$extensionName$ Update",
+      "placeholders": {
+         "extensionName": {
+            "content": "$1",
+            "example": "My Firefox Addon"
+         }
+      }
+   },
+   "welcomeText": {
+      "description": "Text displayed in the welcome notification.",
+      "message": "You'll be notified as soon as an addon is updated."
+   },
+   "welcomeTitle": {
+      "description": "Title displayed in the welcome notification.",
+      "message": "Rest assured"
+   }
+}

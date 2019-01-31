@@ -1,0 +1,4 @@
+var DEFAULT_OPTIONS = {
+  AUTO_CLOSE_NOTIFICATION: false,
+  OPEN_HOMEPAGE: true,
+}
