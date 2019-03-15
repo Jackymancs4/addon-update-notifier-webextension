@@ -5,19 +5,15 @@ var addonDB = {}
 
 // Helper function which returns a basic notification options object.
 function getNotificationOptions(extension) {
-
   return {
     type: 'basic',
     priority: 2,
-    iconUrl: extension.icons ? extension.hostPermissions[extension.hostPermissions.length-1].slice(0, -1)+extension.icons[extension.icons.length - 1].url : "chrome://browser/content/extension.svg"
+    iconUrl: extension.icons ? extension.hostPermissions[extension.hostPermissions.length - 1].slice(0, -1) + extension.icons[extension.icons.length - 1].url : "chrome://browser/content/extension.svg"
   };
 }
 
 // Helper function which displays a notification.
 function showNotification(notificationId, options) {
-
-  console.log(  options.iconUrl );
-
   chrome.notifications.create(notificationId, options, function () {
     chrome.storage.sync.get({
       autoCloseNotification: DEFAULT_OPTIONS.AUTO_CLOSE_NOTIFICATION
@@ -62,22 +58,43 @@ function showExtensionUpdateNotification(extension, oldVersion) {
 // Clear notification if user clicks on it.
 function onNotificationsClicked(notificationId) {
 
-  console.log(notificationId);
-
   chrome.storage.sync.get({
     openHomepage: DEFAULT_OPTIONS.OPEN_HOMEPAGE
   }, function (results) {
-    if (results.openHomepage) {
 
-      var gettingInfo = browser.management.get(addonDB[notificationId])
-      gettingInfo.then(function (info) {
+    try {
+      if (results.openHomepage == "2") {
 
-        var creating = browser.tabs.create({
-          url: info.homepageUrl
+        var gettingInfo = browser.management.get(addonDB[notificationId])
+        gettingInfo.then(function (info) {
+
+          if (info.homepageUrl && info.homepageUrl != "") {
+            browser.tabs.create({
+              url: info.homepageUrl
+            });
+          }
         });
+      } else if (results.openHomepage == "3") {
 
-      });
+        var gettingInfo = browser.management.get(addonDB[notificationId])
+        gettingInfo.then(function (info) {
 
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', 'https://services.addons.mozilla.org/api/v4/addons/addon/' + info.id, true);
+
+          xhr.onload = function () {
+
+            const json = JSON.parse(xhr.responseText);
+            browser.tabs.create({
+              url: json.url
+            });
+          };
+
+          xhr.send(null);
+        });
+      }
+    } catch (error) {
+      // Nevermind
     }
   })
 
@@ -122,29 +139,23 @@ function closeExtensionNotifications(extensionId) {
 }
 
 function onAlarm(alarm) {
-
   if (alarm.name.slice(0, "close_".length) == "close_") {
-      chrome.storage.sync.get({
-        autoCloseNotification: DEFAULT_OPTIONS.AUTO_CLOSE_NOTIFICATION
-      }, function (results) {
-        if (results.autoCloseNotification) {
-          var notificationId = alarm.name.slice("close_".length)
-          chrome.notifications.clear(notificationId);
-        }
-      });
-    } else if (alarm.name.slice(0, "installed_".length) == "installed_") {
+    chrome.storage.sync.get({
+      autoCloseNotification: DEFAULT_OPTIONS.AUTO_CLOSE_NOTIFICATION
+    }, function (results) {
+      if (results.autoCloseNotification) {
+        var notificationId = alarm.name.slice("close_".length)
+        chrome.notifications.clear(notificationId);
+      }
+    });
+  } else if (alarm.name.slice(0, "installed_".length) == "installed_") {
 
-      var gettingInfo = browser.management.get(addonDB[alarm.name.slice("installed_".length)]);
-      gettingInfo.then(function (info) {
-
-        console.log(info)
-
-        var options = setExtensionUpdateNotificationOptions(info, addonDB[alarm.name]);
-        showNotification(getNotificationId(info), options);
-
-      });
-    }
-
+    var gettingInfo = browser.management.get(addonDB[alarm.name.slice("installed_".length)]);
+    gettingInfo.then(function (info) {
+      var options = setExtensionUpdateNotificationOptions(info, addonDB[alarm.name]);
+      showNotification(getNotificationId(info), options);
+    });
+  }
 }
 
 function onInstalled(details) {
