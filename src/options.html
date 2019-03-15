@@ -1,23 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<style>
-  label {margin: 12px 0; display: block;}
-  span {-webkit-margin-start: 0.6em; -webkit-user-select: none;}
-</style>
-</head>
-<body>
 
-  <label>
-    <input type="checkbox" id="autoCloseNotification">
-    <span i18-content="autoCloseNotification"></span>
-  </label>
-  <label>
-      <input type="checkbox" id="openHomepage">
-      <span i18-content="openHomepage"></span>
-  </label>
-  <script src="constants.js"></script>
-  <script src="options.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <style> .browser-style {
+        font-size: 14px;
+        vertical-align: middle;
+      }
+</style>
+  </head>
+
+  <body>
+    <div class="browser-style">
+      <input type="checkbox" id="autoCloseNotification" name="autoCloseNotification">
+      <label for="autoCloseNotification" i18-content="autoCloseNotification" style="vertical-align: sub;"></label>
+    </div>
+    </br>
+    </br>
+    <div class="browser-style">
+      <label>
+        <span i18-content="openHomepage"></span>
+        <select id="openHomepage" class="browser-style">
+          <option value="1" i18-content="openHomepageDoNothing">Do nothing</option>
+          <option value="2" i18-content="openHomepageBase">Open addon homepage</option>
+          <option value="3" i18-content="openHomepageOpenAMO">Open addon AMO page</option>
+        </select>
+      </label>
+    </div>
+    <script src="constants.js"></script>
+    <script src="options.js"></script>
+  </body>
+
 </html>

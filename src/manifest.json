@@ -1,14 +1,21 @@
 {
-   "applications": {
-		"gecko": {
-			"id": "addon-update-notifier@jackymancs4"
-		}
-	},
-   "background": {
-      "scripts": ["constants.js", "notifications.js", "management.js" ]
-   },
-   "default_locale": "en",
+   "name": "__MSG_extName__",
    "description": "__MSG_extDescription__",
+   "manifest_version": 2,
+   "version": "1.2.0",
+   "default_locale": "en",
+   "applications": {
+      "gecko": {
+         "id": "addon-update-notifier@jackymancs4"
+      }
+   },
+   "background": {
+      "scripts": [
+         "constants.js",
+         "notifications.js",
+         "management.js"
+      ]
+   },
    "icons": {
       "16": "icons/icon.svg",
       "24": "icons/icon.svg",
@@ -16,12 +23,15 @@
       "64": "icons/icon.svg",
       "128": "icons/icon.svg",
       "256": "icons/icon.svg"
-  },
-   "manifest_version": 2,
-   "name": "__MSG_extName__",
-   "options_ui": {
-     "page": "options.html"
    },
-   "permissions": [ "alarms", "management", "notifications", "storage" ],
-   "version": "1.1.0"
+   "options_ui": {
+      "page": "options.html",
+      "browser_style": true
+   },
+   "permissions": [
+      "alarms",
+      "management",
+      "notifications",
+      "storage"
+   ]
 }
