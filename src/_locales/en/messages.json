@@ -3,8 +3,17 @@
       "description": "Text displayed to auto close notifications in the options page.",
       "message": "Automatically close notifications"
    },
-   "openhomepage":{
-      "message": "Open addon homepage (if available)"
+   "openHomepageDoNothing": {
+      "message": "Do nothing"
+   },
+   "openHomepageBase": {
+      "message": "Open addon homepage"
+   },
+   "openHomepageOpenAMO": {
+      "message": "Open addon AMO page"
+   },
+   "openhomepage": {
+      "message": "When click on the notification:"
    },
    "extDescription": {
       "description": "Addon description.",
