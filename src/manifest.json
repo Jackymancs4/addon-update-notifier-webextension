@@ -3,6 +3,7 @@
    "description": "__MSG_extDescription__",
    "manifest_version": 2,
    "version": "1.2.0",
+   "homepage_url": "https://github.com/Jackymancs4/addon-update-notifier-webextension/",
    "default_locale": "en",
    "applications": {
       "gecko": {
